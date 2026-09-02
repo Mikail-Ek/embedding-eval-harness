@@ -1,0 +1,33 @@
+import requests
+import json
+
+OLLAMA_URL = "http://localhost:11434/api/embed"
+
+def get_embedding(model: str, text: str):
+    """
+    Sends text to a local Ollama model and returns its embedding vector.
+    """
+    response = requests.post(
+        OLLAMA_URL,
+        json={"model": model, "input": text}
+    )
+    response.raise_for_status()  # raises an error if the request failed
+    data = response.json()
+    return data["embeddings"][0]  # first (and only) embedding returned
+
+
+if __name__ == "__main__":
+    # Quick manual test — same thing your curl commands were doing
+    models_to_test = [
+        "all-minilm",
+        "nomic-embed-text",
+        "mxbai-embed-large",
+        "bge-m3",
+        "qwen3-embedding:4b",
+        "qwen3-embedding:8b",
+    ]
+    sample_text = "hello world"
+
+    for model in models_to_test:
+        vector = get_embedding(model, sample_text)
+        print(f"{model}: got a {len(vector)}-dimensional vector")
