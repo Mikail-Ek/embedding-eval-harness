@@ -1,4 +1,7 @@
 from importlib import import_module
+from pathlib import Path
+
+DATA_DIR = Path(__file__).resolve().parent / "data"
 
 # Load these lazily so environments using an external LangChain installation
 # do not fail static import resolution before the script starts.
@@ -15,8 +18,8 @@ LangchainEmbeddingsWrapper = _ragas_embeddings.LangchainEmbeddingsWrapper
 _ragas_testset = import_module("ragas.testset")
 TestsetGenerator = _ragas_testset.TestsetGenerator
 
-# Load all .txt files from data/
-loader = DirectoryLoader("data", glob="*.txt", loader_cls=TextLoader)
+# Load all doc files from data
+loader = DirectoryLoader(str(DATA_DIR), glob="doc1.txt", loader_cls=TextLoader)
 docs = loader.load()
 print(f"Loaded {len(docs)} documents")
 
@@ -26,9 +29,9 @@ generator_embeddings = LangchainEmbeddingsWrapper(OllamaEmbeddings(model="nomic-
 
 generator = TestsetGenerator(llm=generator_llm, embedding_model=generator_embeddings)
 
-# Generate a small test set (5 questions, to keep it quick)
+# Generate a small test set (5 questions)
 dataset = generator.generate_with_langchain_docs(docs, testset_size=5)
 
 # Save so evaluate.py can reuse it later without regenerating
-dataset.to_pandas().to_json("data/testset.json", orient="records", indent=2)
+dataset.to_pandas().to_json(str(DATA_DIR / "testset.json"), orient="records", indent=2)
 print("Saved test set to data/testset.json")

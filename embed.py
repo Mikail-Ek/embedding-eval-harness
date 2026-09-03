@@ -10,7 +10,7 @@ def get_embedding(model: str, text: str):
     """
     request = Request(
         OLLAMA_URL,
-        data=json.dumps({"model": model, "input": text}).encode("utf-8"),
+        data=json.dumps({"model": model, "input": text, "keep_alive": 0}).encode("utf-8"),
         headers={"Content-Type": "application/json"},
         method="POST",
     )

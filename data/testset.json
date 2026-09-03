@@ -1,0 +1,27 @@
+[
+  {
+    "question": "What are the three steps in RAG and where does the name come from?",
+    "reference": "Retrieve, Augment, and Generate. Retrieval finds relevant documents, augmentation inserts them into the prompt, and generation produces the answer using that context.",
+    "expected_source": "doc1.txt"
+  },
+  {
+    "question": "What is the main benefit of RAG for keeping a system up to date?",
+    "reference": "Only the external knowledge base needs to be updated when new information becomes available, rather than retraining the entire model, which is much cheaper and faster.",
+    "expected_source": "doc1.txt"
+  },
+  {
+    "question": "What is an embedding?",
+    "reference": "A way of turning text into a vector of numbers that captures its meaning, so that text with similar meaning has similar vectors even when the wording is different.",
+    "expected_source": "doc2.txt"
+  },
+  {
+    "question": "What is the difference between attention-based and static embedding models?",
+    "reference": "Attention-based models compute a fresh, context-aware vector by considering every word in relation to every other word, which is accurate but slow. Static models look up a fixed vector per word and average them, which is fast but loses context-awareness.",
+    "expected_source": "doc2.txt"
+  },
+  {
+    "question": "What do Context Precision and Context Recall measure in Ragas?",
+    "reference": "Context Precision checks whether the retrieved documents ranked near the top were actually relevant. Context Recall checks whether all of the relevant information that existed was actually retrieved.",
+    "expected_source": "doc3.txt"
+  }
+]
