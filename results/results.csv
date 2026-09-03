@@ -1,0 +1,7 @@
+model,size,category,correct,total,avg_score,time_seconds
+all-minilm,45MB,Small,4,5,0.543,21.6
+nomic-embed-text,274MB,Small,5,5,0.693,30.3
+mxbai-embed-large,669MB,Small,5,5,0.662,78.8
+bge-m3,1.2GB,Large,5,5,0.648,103.4
+qwen3-embedding:4b,2.5GB,Large,5,5,0.620,221.7
+qwen3-embedding:8b,4.7GB,Large,5,5,0.677,435.5

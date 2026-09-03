@@ -1,68 +1,25 @@
-# Embedding Model Evaluation Harness
+## Results
 
-Prototype evaluation harness for testing the production viability of open-source embedding models for RAG, built during work experience at VIAVI Solutions.
+Full retrieval evaluation run across all six models — 5 questions, cosine similarity between question and document embeddings.
 
-## Purpose
-
-This repo does two things:
-1. Categorizes open-source embedding models into **small** (runs comfortably on Mac) and **large** (heavier resource requirements) buckets
-2. Prototypes an evaluation harness to compare retrieval quality and latency across models, using Ragas-generated test questions
-
-## Setup
-
-Models run locally via [Ollama](https://ollama.com), inside Docker for consistency.
-
-1. Start the Ollama container:
-```bash
-docker run -d --name ollama -p 11434:11434 -v ollama_storage:/root/.ollama ollama/ollama:latest
-```
-
-2. Pull a model:
-```bash
-docker exec -it ollama ollama pull <model-name>
-```
-
-3. Confirm it returns an embedding:
-```bash
-curl http://localhost:11434/api/embed -d '{"model": "<model-name>", "input": "hello world"}'
-```
-
-> **Note:** Docker on Mac cannot access Apple Silicon's GPU — all models here run CPU-only inside the container. Latency numbers reflect CPU-only performance, not native Mac GPU performance.
-
-## Models Tested
-
-| Model | Size | Dimensions | Category | Notes |
+| Model | Category | Correct | Avg Score | Time (s) |
 |---|---|---|---|---|
-| `all-minilm` | 45MB | 384 | Small | Near-instant response |
-| `nomic-embed-text` | 274MB | 768 | Small | |
-| `mxbai-embed-large` | 669MB | 1024 | Small | |
-| `bge-m3` | ~1.2GB | 1024 | Large | |
-| `qwen3-embedding:4b` | 2.5GB | 2560 | Large | Same model family as the 8B version, for a direct size comparison |
-| `qwen3-embedding:8b` | 4.7GB | 4096 | Large | ~57s server load time on first request, ~7.4GB RAM used |
+| all-minilm | Small | 4/5 | 0.543 | 21.6 |
+| nomic-embed-text | Small | 5/5 | 0.693 | 30.3 |
+| mxbai-embed-large | Small | 5/5 | 0.662 | 78.8 |
+| bge-m3 | Large | 5/5 | 0.648 | 103.4 |
+| qwen3-embedding:4b | Large | 5/5 | 0.620 | 221.7 |
+| qwen3-embedding:8b | Large | 5/5 | 0.677 | 435.5 |
 
-All six models pulled via Ollama and confirmed working via `/api/embed`.
+**Key finding:** `nomic-embed-text` (274MB) achieved the highest average confidence score and fastest time among all models that retrieved perfectly, while `qwen3-embedding:8b` (4.7GB) took 14x longer for a comparable result. Accuracy plateaued after the smallest model — additional size and cost bought no further retrieval improvement in this test. This directly supports the presentation's core argument: the highest-benchmark or largest model is not automatically the best production choice.
 
-## Project Structure
-
-```
-embedding-eval-harness/
-├── README.md          # this file
-├── embed.py            # reusable function to call Ollama's /api/embed
-├── data/                # source documents for test generation (not yet populated)
-└── results/             # evaluation output (not yet populated)
-```
+Full results: `results/results.csv`
 
 ## Status
 
 - [x] Docker + Ollama running locally
 - [x] Six models pulled and tested across small/large categories
 - [x] `embed.py` — reusable embedding function
-- [ ] Ragas test set generation
-- [ ] Retrieval evaluation (Context Precision / Context Recall)
-- [ ] Results write-up
-
-## Next Steps
-
-1. Install Ragas, generate a synthetic test set from sample documents
-2. Build `evaluate.py` — run retrieval across all six models, score with Context Precision/Recall
-3. Save results to `results/`
+- [x] Test set (manually authored, 5 questions — automated generation via `generate_testset.py` attempted but too slow on local CPU-only setup)
+- [x] Retrieval evaluation (`evaluate.py` — cosine similarity based)
+- [x] Results write-up
