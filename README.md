@@ -23,3 +23,8 @@ Full results: `results/results.csv`
 - [x] Test set (manually authored, 5 questions — automated generation via `generate_testset.py` attempted but too slow on local CPU-only setup)
 - [x] Retrieval evaluation (`evaluate.py` — cosine similarity based)
 - [x] Results write-up
+
+## Next Steps
+
+- Expand the test set beyond 5 questions for more statistically robust results
+- Let `generate_testset.py` run to completion or on stronger hardware for automated, larger-scale test generation
