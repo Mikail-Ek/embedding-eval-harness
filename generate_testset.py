@@ -17,14 +17,17 @@ _ragas_embeddings = import_module("ragas.embeddings")
 LangchainEmbeddingsWrapper = _ragas_embeddings.LangchainEmbeddingsWrapper
 _ragas_testset = import_module("ragas.testset")
 TestsetGenerator = _ragas_testset.TestsetGenerator
+_ragas_run_config = import_module("ragas.run_config")
+RunConfig = _ragas_run_config.RunConfig
 
 # Load all doc files from data
-loader = DirectoryLoader(str(DATA_DIR), glob="doc1.txt", loader_cls=TextLoader)
+loader = DirectoryLoader(str(DATA_DIR), glob="squad_doc*.txt", loader_cls=TextLoader)
 docs = loader.load()
 print(f"Loaded {len(docs)} documents")
 
 # Local models Ragas will use to generate questions
-generator_llm = LangchainLLMWrapper(ChatOllama(model="llama3.2:1b", base_url="http://localhost:11434"))
+run_config = RunConfig(max_retries=5, max_wait=60)
+generator_llm = LangchainLLMWrapper(ChatOllama(model="llama3.1:8b", base_url="http://localhost:11434"), run_config=run_config)
 generator_embeddings = LangchainEmbeddingsWrapper(OllamaEmbeddings(model="nomic-embed-text", base_url="http://localhost:11434"))
 
 generator = TestsetGenerator(llm=generator_llm, embedding_model=generator_embeddings)
