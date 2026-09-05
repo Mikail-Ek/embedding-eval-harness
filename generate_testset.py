@@ -36,5 +36,5 @@ generator = TestsetGenerator(llm=generator_llm, embedding_model=generator_embedd
 dataset = generator.generate_with_langchain_docs(docs, testset_size=5)
 
 # Save so evaluate.py can reuse it later without regenerating
-dataset.to_pandas().to_json(str(DATA_DIR / "testset.json"), orient="records", indent=2)
-print("Saved test set to data/testset.json")
+dataset.to_pandas().to_json(str(DATA_DIR / "generated_testset.json"), orient="records", indent=2)
+print("Saved test set to data/generated_testset.json")
