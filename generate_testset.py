@@ -27,7 +27,7 @@ print(f"Loaded {len(docs)} documents")
 
 # Local models Ragas will use to generate questions
 run_config = RunConfig(max_retries=5, max_wait=60)
-generator_llm = LangchainLLMWrapper(ChatOllama(model="llama3.1:8b", base_url="http://localhost:11434"), run_config=run_config)
+generator_llm = LangchainLLMWrapper(ChatOllama(model="qwen3:8b", base_url="http://localhost:11434"), run_config=run_config)
 generator_embeddings = LangchainEmbeddingsWrapper(OllamaEmbeddings(model="nomic-embed-text", base_url="http://localhost:11434"))
 
 generator = TestsetGenerator(llm=generator_llm, embedding_model=generator_embeddings)
