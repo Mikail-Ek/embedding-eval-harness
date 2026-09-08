@@ -1,6 +1,0 @@
-...
-1.	An enterprise user within the IP-PBX tries to establish a call. The IP-PBX sends an INVITE towards IMS via the P-CSCF or via the IBCF (contact point for the IP-PBX). If no security association exists between the P-CSCF/IBCF and the IP-PBX, TLS will ... ...subsystem ignores the 3P ID within the SIP INVITE (if present) and do not execute the rest of 3P ID related steps during the call set-up. The call continues without presenting 3P ID to the called endpoint. 
-If the PBX is authorized to use 3P IDs, the ... ...are not executed during the call set-up. The call continues without presenting 3P ID to the called endpoint.  
-NOTE:  	If no 3P ID is received in the SIP INVITE from the PBX, suppression of a Database lookup can be optionally applied based on a local ... ...party specific user identity. The UE interacts with the third party via application layer to receive a token for the authorization of third party specific ID.
-In the PBX case, it is assumed that the PBX will authenticate the UE and create the SIP INVITE ... ...be sent over the secure connection. The INVITE is assumed to include a calling party identity.
-2a.	The IBCF may apply general screening rules to the request, and adds a P-Served-User-Identity to the INVITE with the identity of the IP-PBX (SIP URI identifying ...

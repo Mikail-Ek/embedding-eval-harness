@@ -1,7 +1,0 @@
-...or locally configuration on the UPF, the UPF identifies the info in above in item 1 of clause 6.56.2.
-5.	UPF marks the PDU Set information in the User plane packets sent to RAN according in the GTP-U header.
-6.	Based on the PDU Set in GTP-U header and ... ...note:	What information can be achieved by each option and more options need further discussion.
-6.52.2.3	PDU Set information provided by the UPF to the RAN
-UPF provides the above PDU Set related information (listed in bullet #1 in clause 6.51.2.1) to ... ...UPF for DL traffic. In the DL, the UPF will populate the GTP-U header with information that can be used by the RAN for PDU Set handling. In the UL, UE includes the per PDU information in the PDU header which is visible to the RAN. This information can ... ...the PDU Set integrated packet handling in the UE, RAN and/or UPF.
--	What information needs to be provided to the RAN and/or UPF to support PDU Set integrated packet handling in both the downlink and uplink direction.
--	Whether and how to provide information ... ...described in clauses 6.12.3.2.1 and 6.12.3.2.2, the UPF FAR adds PDU Set info into the GTP-U headers of DL packets in order to assist RAN for PDU Set integrated QoS handling. The PDU Set info may include the start/end indication of the PDU Set, the PDU ...
