@@ -21,7 +21,7 @@ _ragas_run_config = import_module("ragas.run_config")
 RunConfig = _ragas_run_config.RunConfig
 
 # Load all doc files from data
-loader = DirectoryLoader(str(DATA_DIR), glob="squad_doc*.txt", loader_cls=TextLoader)
+loader = DirectoryLoader(str(DATA_DIR), glob="telecom_doc*.txt", loader_cls=TextLoader)
 docs = loader.load()
 print(f"Loaded {len(docs)} documents")
 
@@ -33,7 +33,7 @@ generator_embeddings = LangchainEmbeddingsWrapper(OllamaEmbeddings(model="nomic-
 generator = TestsetGenerator(llm=generator_llm, embedding_model=generator_embeddings)
 
 # Generate a small test set (5 questions)
-dataset = generator.generate_with_langchain_docs(docs, testset_size=5)
+dataset = generator.generate_with_langchain_docs(docs, testset_size=10)
 
 # Save so evaluate.py can reuse it later without regenerating
 dataset.to_pandas().to_json(str(DATA_DIR / "generated_testset.json"), orient="records", indent=2)
