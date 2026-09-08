@@ -14,7 +14,7 @@ sample_indices = random.sample(range(len(rows)), 20)  # extra buffer in case som
 
 doc_count = 0
 for idx in sample_indices:
-    if doc_count >= 12:
+    if doc_count >= 6:
         break
 
     row = rows[idx]
