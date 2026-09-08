@@ -1,0 +1,24 @@
+...  description: >
+        Represents the contents of a notification of UE reachability for IP sent by the HSS
+      type: object
+      required:
+       - reachabilityIndicator
+       - detectingNode
+       - accessType
+      properties:
+        reachabilityIndicator:
+          ... ...indicate the IP address of the UE.
+The UE IP address is a type 4 information element with minimum length of 7 octets and a maximum length of 19 octets.
+The UE IP address information element is coded as shown in figure 11.3.49.1 and table 11.3.49.1.
+Figure ... ...information element is used to indicate which security algorithms are supported by the UE.
+The UE security capabilities is a type 4 information element with a minimum length of 4 octets and a maximum length of 10 octets.
+The UE security capabilities information ... ...
+-- **************************************************************
+--
+-- UE RADIO CAPABILITY INFO INDICATION
+--
+-- **************************************************************
+
+UERadioCapabilityInfoIndication ::= SEQUENCE {
+	protocolIEs			ProtocolIE-... ...information element is to provide the unavailability period duration and the end of unavailability report indication from network to the UE.
+The Unavailability configuration information element is coded as shown in figure 9.9.3.70.1 and table 9.9.3.70....

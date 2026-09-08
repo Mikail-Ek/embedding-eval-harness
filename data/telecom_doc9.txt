@@ -1,0 +1,14 @@
+...for Event Notification Filtering".
+[42]	3GPP TS 24.483: "Mission Critical Services (MCS) Management Object (MO)".
+[43]	3GPP TS 24.301: "Non-Access-Stratum (NAS) protocol for Evolved Packet System (EPS); Stage 3".
+[44]	IETF RFC 5627 (October 2009): "Obtaining ... ...Service (MBMS); Protocols and codecs".
+[55]	3GPP TS 29.554: "Background Data Transfer Policy Control Service; Stage 3".
+[56]	3GPP TS 28.530: "Management and orchestration; Concepts, use cases and requirements".
+[57]	3GPP TS 28.531: "Management and orchestration; ... ...of the values defined in this version of the protocol. The network shall return a negotiated value which is explicitly defined in this version of the protocol.
+
+The MS shall consider all other values as reserved.
+
+Traffic handling priority, octet 11 (... ...in the <OnNetwork> element of the MCPTT service configuration document (see the service configuration document in 3GPP TS 24.484 [50])
+When determining the Resource-Priority header field namespace and priority values as specified in IETF RFC 8101 [48] ... ... or
+b)	the UE supports local IP address in traffic flow aggregate description and TFT filter, the requested PDN Type is different from non-IP and Ethernet, and the requested APN is for UAS services.
+This IE shall not be included if the Protocol configuration ...

@@ -1,0 +1,8 @@
+...2.1.5	Usage information report list sending procedure not accepted by the ProSe Function
+If the USAGE_INFORMATION_REPORT_LIST message is not accepted by the ProSe Function CTF (ADF), the ProSe Function CTF (ADF) shall send a USAGE_INFORMATION_REPORT_LIST_RESPONSE ... ...of the UE and the ProSe Function CTF (ADF) in the usage information report list sending procedure.
+
+Figure 10.3.2.1.2.1: Usage information report list sending procedure
+10.3.2.1.3	Usage information report list sending procedure accepted by the ProSe Function
+... ...message to the configured IP address of the ProSe Function CTF (ADF). If the UE is not configured with the IP address of the ProSe Function CTF (ADF), the UE shall send the USAGE_INFORMATION_REPORT_LIST message to the IP address of the ProSe Function ... ...by the ProSe Function
+Upon receiving a USAGE_INFORMATION_REPORT_LIST message from UE, the ProSe Function CTF (ADF) triggers one or more charging data requests according to 3GPP TS 32.277 [27].
+If the USAGE_INFORMATION_REPORT_LIST message is accepted by ... ...message is accepted by the ProSe Function CTF (ADF), the ProSe Function CTF (ADF) shall send a USAGE_INFORMATION_REPORT_LIST_RESPONSE message to the UE, containing a <response-accept> element with transaction ID set to the value of the transaction ID ...

@@ -1,0 +1,25 @@
+...Standard Methods
+6.2.3.3.3.1	GET
+The GET method allows a UASS to retrieve a real-time UAV status subscription identified by the subscription identifier included in the request URI (i.e. within the "/{subscriptionId}" path segment).This method shall support ... ... OK. The requested real-time UAV status subscription resource shall be returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RTUavStatusSubsc'
+        '307':
+          $ref: 'TS29122_CommonData.... ...Real-time UAV Status Subscription identifier.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RTUavStatusSubsc'
+      ... ...requesting to update the Individual Real-time UAV Status Subscription resource identified by the provided "subscriptionId" path segment. The request body shall include an updated representation of the resource within the RTUavStatusSubsc data structure ... ...      responses:
+        '200':
+          description: >
+            OK. The subscription is successfully created and a representation of the created
+            Individual Real-time UAV Status Subscription resource shall be returned.
+          content:
+            ...

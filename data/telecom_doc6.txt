@@ -1,0 +1,11 @@
+...applications to make use of advanced functionalities provided by the 5G System, combined with additional well-defined client and network functionalities for media services: an MSE enables improved media services.
+In implementations and deployments, such ... ...of the specification features supported by an implementation in a document and their implemented options. 
+-	Approach 2, as proposed in clause 5.3, addresses the following additional aspects 
+-	Reference architecture for MSE based on 5GMS architecture
+-	... ...claim support of the MSE specification by having verified that the all tests have been passed.
+While 3GPP is not in a position to mandate such a conformance regime, it is highly recommended to consider the potential benefits of supporting third parties ... ...of MSD information unit.
+
+Note that for the purpose of MSD improvement, a UE should perform better than the minimum requirement in order to claim the low-MSD capability. For example, if the minimum requirement falls into the interval of MSD≤Thi dB, the ... ...in the bottom in Figure 7.1.1-4. 
+
+Figure 7.1.1-4: relationship of MSD existence region between specification and a UE with lower MSD
+Observation 4: Even if a UE with better isolation still may have challenges in achieving MSD = 0 dB based on the existing ...

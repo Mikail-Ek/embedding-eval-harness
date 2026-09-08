@@ -1,0 +1,14 @@
+...outside the scope of 3GPP specifications.
+NOTE:	This solution does not assume that 5G VN group communication only happens in a local area, e.g. involving the same unique data centre as a SMF Set may be deployed across multiple sites/data centres. Furthermore, ... ...in the SMF set.
+5.23	5G VN Group Communication (for 5GC)
+5.23.1	General
+Stage 2 requirements for the support of 5G VN communication are specified in clauses 4.4.6 and 5.8.2.13 of 3GPP TS 23.501 [28].
+The 5G VN group communication includes one to one communication ... ...Solution #3: use of SMF sets for 5G VN group communications.	23
+6.3.1	Introduction	23
+6.3.2	Functional Description	23
+6.3.3	Procedures	24
+6.3.4	Impacts on existing entities and interfaces	25
+6.4	Solution #4: Multiple SMFs for VN group communication	26
+... ...within a 5G VN group an I-SMF is used as specified in 3GPP Rel-17 specifications with N16a modifications described below.
+NOTE 3:	Each 5G VN group can be associated with a specific slice, using e.g. the Slice Differentiator (SD), parameter of the S-NSSAI, ... ...been supported by 5GC since Rel-16.
+Any inter SMF interactions related with intra SMF set co-ordination about a 5G VN group ( e.g. on the control of the N19 tunnel between the UPF(s) involved in a 5G VN group communication) is left outside the scope of ...

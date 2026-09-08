@@ -1,0 +1,6 @@
+...indication or indication of the last PDU in a PDU set: this can be helpful for gNB to indicate the UE to dynamically skip PDCCH monitoring once the last PDU of the PDU set is delivered.
+-	PDU set level QoS parameters including priority and [air interface] ... ...such a request, the UPF shall identify the last PDU of each Data Burst in the DL application traffic based on the End indication according to the Protocol Description or UPF implementation, and it shall mark the End of Data Burst Indication in the GTP-... ...may include the Protocol Description (see clause 5.38.3) used by the service data flow in the PDR providing information to the UPF on how to detect the last PDU of each Data Burst within the application traffic.
+Upon receiving such a request, the UPF ... ...the last PDU has the "end" marker in the GTP-U header.
+a)	This method normally needs a timer in the GTP-U sender (e.g. the UPF) to detect if there if there is no any following GTP-U packet (e.g. the last PDU Set in a PDU burst), then it marks the "end" ... ...the relative importance of a PDU Set compared to other PDU Sets within a QoS Flow. RAN may use it for PDU Set level packet discarding in presence of congestion;
+-	End of Data Burst indication in the header of the last PDU of the Data Burst (optional).
+...

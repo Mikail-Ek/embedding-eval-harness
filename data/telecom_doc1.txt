@@ -1,0 +1,9 @@
+...UE 
+-	the representative value 2 is derived from the coverage margins from all sourcing companies regardless of whether or one had provided uplink coverage evaluation results for the reference NR UE 
+-	the number of samples 2 is the total number of all ... ...sourcing companies who had provided uplink coverage evaluation results for the reference NR UE
+-	the number of samples 1 is the total number of sourcing companies that had provided uplink coverage evaluation results for the reference NR UE 
+-	the representative ... ...or Quota IE to the value calculated as specified in IETF RFC 4006 [16] according to the Measurement Method.
+NOTE 1:	The value can be calculated using the following formula:
+	S = Q1*M1 + Q2*M2 + ... + Qn*Mn,
+where the S is the quota for the credit pool, ... ...by the AMF).
+3.	The AMF returns the coverage data in the Registration Accept. The AMF may obtain the coverage data from pre-configured data in the AMF which may not need any AMF interpretation if coverage data is configured for a limited set of locations ... ...to the sampling ratio and only report the event(s) related to the selected subset of UEs. If the "partitionCriteria" attribute is additionally included, then the AF shall first partition the UEs according to the value of the "partitionCriteria" attribute ...
