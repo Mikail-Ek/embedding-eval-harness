@@ -28,7 +28,7 @@ print(f"Loaded {len(docs)} documents")
 # Local models Ragas will use to generate questions
 run_config = RunConfig(max_retries=5, max_wait=60)
 generator_llm = LangchainLLMWrapper(ChatOllama(model="qwen3:8b", base_url="http://localhost:11434"), run_config=run_config)
-generator_embeddings = LangchainEmbeddingsWrapper(OllamaEmbeddings(model="nomic-embed-text", base_url="http://localhost:11434"))
+generator_embeddings = LangchainEmbeddingsWrapper(OllamaEmbeddings(model="hf.co/NeoRoth/nemotron-3-embed-1b-gguf:Q4_K_M", base_url="http://localhost:11434"))
 
 generator = TestsetGenerator(llm=generator_llm, embedding_model=generator_embeddings)
 
@@ -36,5 +36,5 @@ generator = TestsetGenerator(llm=generator_llm, embedding_model=generator_embedd
 dataset = generator.generate_with_langchain_docs(docs, testset_size=10)
 
 # Save so evaluate.py can reuse it later without regenerating
-dataset.to_pandas().to_json(str(DATA_DIR / "generated_testset.json"), orient="records", indent=2)
-print("Saved test set to data/generated_testset.json")
+dataset.to_pandas().to_json(str(DATA_DIR / "generated_testset_nemotron_embed.json"), orient="records", indent=2)
+print("Saved test set to data/generated_testset_nemotron_embed.json")
