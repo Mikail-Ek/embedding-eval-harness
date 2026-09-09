@@ -25,13 +25,15 @@ def get_embedding(model: str, text: str):
 if __name__ == "__main__":
     # Quick manual test — same thing your curl commands were doing
     models_to_test = [
-        "all-minilm",
-        "nomic-embed-text",
-        "mxbai-embed-large",
-        "bge-m3",
-        "qwen3-embedding:4b",
-        "qwen3-embedding:8b",
-    ]
+    "all-minilm",
+    "nomic-embed-text",
+    "mxbai-embed-large",
+    "bge-m3",
+    "qwen3-embedding:4b",
+    "qwen3-embedding:8b",
+    "embeddinggemma",
+    "hf.co/NeoRoth/nemotron-3-embed-1b-gguf:Q4_K_M",
+]
     sample_text = "hello world"
 
     for model in models_to_test:

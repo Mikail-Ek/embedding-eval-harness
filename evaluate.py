@@ -24,6 +24,8 @@ MODELS = [
     "bge-m3",
     "qwen3-embedding:4b",
     "qwen3-embedding:8b",
+    "embeddinggemma",
+    "hf.co/NeoRoth/nemotron-3-embed-1b-gguf:Q4_K_M",
 ]
 
 DOCUMENTS = ["doc1.txt", "doc2.txt", "doc3.txt"]
