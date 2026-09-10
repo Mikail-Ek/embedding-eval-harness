@@ -76,3 +76,9 @@ None of the eight models in Part 1 can process images directly. Two architecture
 ## Part 5 — Model Licensing & Commercial Use
 
 Full licensing review covering GPL/AGPL exposure, per-model commercial terms, known downsides, and use cases for every model used. None of the models or core libraries are GPL/AGPL. Most are unconditionally commercial-safe (Apache 2.0/MIT); the Llama family, Google's Gemma, and `llava` carry real conditions worth legal review before commercial use. This is research, not legal advice.
+
+## Part 6 — Reranker Models: Baseline Investigation
+
+Baseline (non-tested) research comparing reranker models to the retrieval approaches used throughout this project, per a follow-up request. No rerankers were run — this is architectural and literature-based analysis only.
+
+Key points: every model in Part 1 is a bi-encoder (documents and queries embedded independently, then compared); a reranker is a cross-encoder (query and document processed jointly, no pre-computation possible). Published research shows rerankers lift retrieval accuracy 15–40% on average, at the cost of no pre-computation and poor scaling with candidate count — which is why they're used as a second-stage refinement after embedding-based retrieval, not a replacement for it. Two candidate models identified for future testing: `Qwen3-Reranker` and
