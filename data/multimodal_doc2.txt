@@ -1,0 +1,32 @@
+ The image displays a humorous chart titled "FAVORITE TYPE OF MOVIE." The chart is designed to resemble a bar graph, with each bar representing a different category of movie and its corresponding popularity. The categories are labeled as follows:
+
+- Favorite Type of Movie (with no specific numbers or percentages provided)
+- People who like Comedy (7)
+- People who like Romance (5)
+- People who like Action (6)
+- People who like Drama (4)
+- People who like Romance (5)
+- People who like Sci-Fi (2)
+- People who like Drama (4)
+
+Below the chart, there are three horizontal bars, each corresponding to one of the movie genres. The bars are color-coded to represent different people, with the following legend:
+
+- People who like Comedy (colored in purple)
+- People who like Romance (colored in pink)
+- People who like Action (colored in red)
+- People who like Drama (colored in green)
+- People who like Romance (colored in blue)
+- People who like Sci-Fi (colored in yellow)
+- People who like Drama (colored in orange)
+
+In addition to the bars, there is text listing the various genres again:
+
+- Action
+- Romance
+- Comedy
+- Drama
+- Romance
+- Sci-Fi
+- Drama
+
+The chart is presented on a transparent background, and the image is styled to look like a transparent overlay, as indicated by the white transparency checkerboard pattern. 

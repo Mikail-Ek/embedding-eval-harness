@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What percentage of time is spent sleeping according to the activities chart?",
+    "reference": "34%",
+    "expected_source": "multimodal_doc1.txt"
+  },
+  {
+    "question": "Which activities have the lowest percentage in the pie chart?",
+    "reference": "Playing and TV, each at 8%",
+    "expected_source": "multimodal_doc1.txt"
+  },
+  {
+    "question": "What percentage is spent on school according to the chart?",
+    "reference": "25%",
+    "expected_source": "multimodal_doc1.txt"
+  },
+  {
+    "question": "Which type of movie is the most popular according to the chart?",
+    "reference": "Romance, with 6 people",
+    "expected_source": "multimodal_doc2.txt"
+  },
+  {
+    "question": "How many people chose Drama as their favorite movie type?",
+    "reference": "1",
+    "expected_source": "multimodal_doc2.txt"
+  },
+  {
+    "question": "How many people chose Action movies?",
+    "reference": "5",
+    "expected_source": "multimodal_doc2.txt"
+  }
+]

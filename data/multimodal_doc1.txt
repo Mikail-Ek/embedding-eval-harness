@@ -1,0 +1,12 @@
+ The image displays a pie chart with a title "Activities" at the top. The chart is divided into eight categories with their corresponding percentages and corresponding activities. The percentages are shown in color, with each category represented by a slice of the pie chart. The color coding is as follows:
+
+1. Sleeping - 25% (indicated by a blue slice)
+2. School - 18% (indicated by a green slice)
+3. Music - 8% (indicated by a red slice)
+4. TV - 5% (indicated by a purple slice)
+5. Playing - 3% (indicated by a yellow slice)
+6. School - 18% (same as the second slice, indicating an error in the chart's labels)
+7. Sleeping - 25% (same as the first slice, indicating an error in the chart's labels)
+8. Playing - 3% (same as the third slice, indicating an error in the chart's labels)
+
+The chart also contains a legend on the right side, which appears to be incomplete or incorrect due to the repeated use of "Sleeping" and "Playing" as categories, with the same color codes as the actual pie chart. This suggests that the chart may have been designed with fewer categories initially and was later modified, leading to inconsistencies in the labels and possibly the percentages. 
