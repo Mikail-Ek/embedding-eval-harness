@@ -72,3 +72,7 @@ None of the eight models in Part 1 can process images directly. Two architecture
 
 - **Path A (captioning bridge):** `llava` captions each chart, then the eight report models retrieve against the captions. Result: llava's captions were **0/10 factually correct** on exact numbers, yet retrieval still scored a perfect 6/6 — a real risk, since retrieval success doesn't guarantee correct facts reach the end user.
 - **Path B (direct image embedding):** `ColQwen2` embeds the raw image directly,
+
+## Part 5 — Model Licensing & Commercial Use
+
+Full licensing review covering GPL/AGPL exposure, per-model commercial terms, known downsides, and use cases for every model used. None of the models or core libraries are GPL/AGPL. Most are unconditionally commercial-safe (Apache 2.0/MIT); the Llama family, Google's Gemma, and `llava` carry real conditions worth legal review before commercial use. This is research, not legal advice.
