@@ -1,34 +1,74 @@
-## Results
+# Embedding Evaluation Harness
 
-Full retrieval evaluation run across all six models — 5 questions, cosine similarity between question and document embeddings.
+A local, Ollama-based harness for evaluating embedding models on retrieval accuracy, investigating automated test-set generation with Ragas, and testing multimodal document retrieval — built during VIAVI Solutions work experience (AI/ML).
 
-| Model | Size | Dimensions | Category | Correct | Avg Score | Time (s) |
-|---|---|---|---|---|---|---|
-| all-minilm | 45MB | 384 | Small | 4/5 | 0.543 | 5.9 |
-| nomic-embed-text | 274MB | 768 | Small | 5/5 | 0.693 | 6.0 |
-| embeddinggemma | 620MB | 768 | Small | 5/5 | 0.556 | 15.8 |
-| mxbai-embed-large | 669MB | 1024 | Small | 5/5 | 0.662 | 11.6 |
-| nemotron-3-embed-1b | 748MB | 2048 | Small | 5/5 | 0.759 | 28.4 |
-| bge-m3 | ~1.2GB | 1024 | Large | 5/5 | 0.648 | 26.3 |
-| qwen3-embedding:4b | 2.5GB | 2560 | Large | 5/5 | 0.620 | 94.8 |
-| qwen3-embedding:8b | 4.7GB | 4096 | Large | 5/5 | 0.677 | 186.9 |
+## Setup
 
-**Update (follow-up request):** `embeddinggemma` (Google) and `nemotron-3-embed-1b` (NVIDIA, via community GGUF conversion — see [`hf.co/NeoRoth/nemotron-3-embed-1b-gguf`](https://huggingface.co/NeoRoth/nemotron-3-embed-1b-gguf)) were added after the original six-model evaluation. **Nemotron-3-Embed-1B now has the highest average score of any model tested**, beating even qwen3-embedding:8b while running 6.6× faster.
+```bash
+docker run -d --name ollama -p 11434:11434 -v ollama_storage:/root/.ollama ollama/ollama:latest
+docker exec -it ollama ollama pull all-minilm
+docker exec -it ollama ollama pull nomic-embed-text
+docker exec -it ollama ollama pull mxbai-embed-large
+docker exec -it ollama ollama pull bge-m3
+docker exec -it ollama ollama pull qwen3-embedding:4b
+docker exec -it ollama ollama pull qwen3-embedding:8b
+docker exec -it ollama ollama pull embeddinggemma
+docker exec -it ollama ollama pull hf.co/NeoRoth/nemotron-3-embed-1b-gguf:Q4_K_M
+docker exec -it ollama ollama pull qwen3:8b
+docker exec -it ollama ollama pull llava
+```
 
-**Key finding:** `nomic-embed-text` (274MB) achieved the highest average confidence score and fastest time among all models that retrieved perfectly, while `qwen3-embedding:8b` (4.7GB) took 14x longer for a comparable result. Accuracy plateaued after the smallest model — additional size and cost bought no further retrieval improvement in this test. This directly supports the presentation's core argument: the highest-benchmark or largest model is not automatically the best production choice.
+## Repository Structure
 
-Full results: `results/results.csv`
+| File | Purpose |
+|---|---|
+| `embed.py` | Reusable embedding function used by all evaluation scripts |
+| `evaluate.py` | Six-to-eight-model retrieval evaluation (Part 1) |
+| `generate_testset.py` | Ragas automated test-set generation (Part 2) |
+| `prepare_squad_data.py`, `prepare_telecom_data.py` | Source document preparation for Ragas generation |
+| `caption_images.py` | llava-based image captioning (Part 4, Path A) |
+| `evaluate_multimodal.py` | Eight-model retrieval evaluation on captioned images (Part 4, Path A) |
+| `test_colpali.py` | ColQwen2 direct image embedding (Part 4, Path B) |
+| `data/` | All test sets, source documents, and generated outputs |
+| `results/` | Evaluation results (CSV) |
 
-## Status
+## Part 1 — Embedding Model Evaluation
 
-- [x] Docker + Ollama running locally
-- [x] Six models pulled and tested across small/large categories
-- [x] `embed.py` — reusable embedding function
-- [x] Test set (manually authored, 5 questions — automated generation via `generate_testset.py` attempted but too slow on local CPU-only setup)
-- [x] Retrieval evaluation (`evaluate.py` — cosine similarity based)
-- [x] Results write-up
+Eight models evaluated on retrieval accuracy, confidence, and speed, using a fixed five-question test set across three documents.
 
-## Next Steps
+| Model | Size | Dims | Correct | Avg Score | Time (s) |
+|---|---|---|---|---|---|
+| all-minilm | 45MB | 384 | 4/5 | 0.543 | 5.9 |
+| nomic-embed-text | 274MB | 768 | 5/5 | 0.693 | 6.0 |
+| embeddinggemma | 620MB | 768 | 5/5 | 0.556 | 15.8 |
+| mxbai-embed-large | 669MB | 1024 | 5/5 | 0.662 | 11.6 |
+| **nemotron-3-embed-1b** | 748MB | 2048 | 5/5 | **0.759** | 28.4 |
+| bge-m3 | 1.2GB | 1024 | 5/5 | 0.648 | 26.3 |
+| qwen3-embedding:4b | 2.5GB | 2560 | 5/5 | 0.620 | 94.8 |
+| qwen3-embedding:8b | 4.7GB | 4096 | 5/5 | 0.677 | 186.9 |
 
-- Expand the test set beyond 5 questions for more statistically robust results
-- Let `generate_testset.py` run to completion or on stronger hardware for automated, larger-scale test generation
+**Key finding:** `nemotron-3-embed-1b` (NVIDIA) scored highest overall — beating a model 17x its size (`qwen3-embedding:8b`) while running 6.6x faster. `nomic-embed-text` remains the best efficiency pick among the smaller models.
+
+## Part 2 — Automated Test Generation with Ragas
+
+Investigated why Ragas's synthetic test-generation pipeline was unreliable across several local models.
+
+| Model | Dataset | Docs | Outcome |
+|---|---|---|---|
+| llama3.2:1b | Original docs | 3 | Never progressed |
+| llama3.2:3b | Original docs | 3 | Failed — JSON formatting errors |
+| llama3.1:8b | SQuAD (CPU & GPU) | 1–3 | Partial — same failure on both CPU and GPU |
+| **qwen3:8b** | SQuAD, Telecom | 3–12 | **Full success on both datasets** |
+
+**Key finding:** reliability depends on whether a model is trained for structured output, not on size or hardware — `qwen3:8b` succeeded consistently where the entire Llama family failed at every size tested, including on GPU. Working generated test sets exist for both a general-domain (SQuAD) and telecom-domain (3GPP/TeleQnA) dataset. A follow-up test also compared `nomic-embed-text` vs. `nemotron-3-embed-1b` as Ragas's internal supporting embedding model — both work, but produce measurably different output character.
+
+## Part 3 — Hardware Requirements & Industry Context
+
+Minimum/recommended CPU and GPU specs documented for all four models used in Part 2. Also includes independent industry research: TeleEmbedBench (validates the Qwen family's strength on telecom-domain content) and GSMA's OTel-Embedding (telecom-specific fine-tuning, +9.6 to +60.2 NDCG@10 points over generic baselines).
+
+## Part 4 — Multimodal Document Retrieval
+
+None of the eight models in Part 1 can process images directly. Two architectures were tested on real chart images:
+
+- **Path A (captioning bridge):** `llava` captions each chart, then the eight report models retrieve against the captions. Result: llava's captions were **0/10 factually correct** on exact numbers, yet retrieval still scored a perfect 6/6 — a real risk, since retrieval success doesn't guarantee correct facts reach the end user.
+- **Path B (direct image embedding):** `ColQwen2` embeds the raw image directly,
